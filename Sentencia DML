@@ -1,0 +1,7 @@
+BEGIN
+MOSTRAR_INFORMACION ( “10140-1” , “1070”)
+END;
+----------------------------------------
+BEGIN
+MOSTRAR_DATOS_HISTORICOS ( “10140-2” , “1067”);
+END;
