@@ -1,0 +1,52 @@
+CREATE OR REPLACE PROCEDURE MOSTRAR_INFORMACION ( numHoja CONTROL_PARAMETROS.NRO_HOJA%TYPE, numLote CONTROL_PARAMETROS.NRO_LOTE%TYPE)
+AS
+bobina NUMBER;
+ancho NUMBER;
+fuelle NUMBER;
+espesor  NUMBER;
+gramaje  NUMBER;
+otros  NUMBER;
+sustancias  NUMBER;
+estado  NUMBER;
+limpieza  NUMBER;
+DECLARE
+SELECT NRO_BOBINA, ANCHO ,FUELLE ,ESPESOR ,GRAMAJE , OTROS,  LIBRE_SUSTANCIAS,  BUEN_ESTADO , LIMPIO
+INTO bobina, ancho, fuelle, espesor, gramaje, otros, sustancias, estado, limpieza
+ FROM CONTROL_PARAMETROS
+WHERE
+ NRO_HOJA = numHoja
+AND NRO_LOTE = numLote;
+END;
+*********************************************************************
+CREATE OR REPLACE PROCEDURE MOSTRAR_DATOS_HISTORICOS ( numHoja CONTROL_PARAMETROS.NRO_HOJA%TYPE, numLote CONTROL_PARAMETROS.NRO_LOTE%TYPE)
+AS
+a1_ma NUMBER;
+a1_mi NUMBER;
+a2_ma NUMBER;
+a2_mi NUMBER;
+c1_ma NUMBER;
+c1_mi NUMBER;
+c2_ma NUMBER;
+c2_mi NUMBER;
+f1_ma NUMBER;
+f1_mi NUMBER;
+f2_ma NUMBER;
+f2_mi NUMBER;
+pres NUMBER;
+mts_x_min NUMBER;
+velocidad NUMBER;
+alimentacion NUMBER;
+ventilacion NUMBER;
+DECLARE
+SELECT A1_MAX, A1_MIN, A2_MAX, A2_MIN, C1_MAX, C1_MIN, C2_MAX, C2_MIN, F1_MAX, F1_MIN, F2_MAX, F2_MIN, PRESION, MTS_X_MINUTO, VELOCIDAD, ALIMENTACION, VENTILACION,
+INTO a1_ma, a1_mi; a2_ma, a2_mi, c1_ma, c1_mi, c2_ma, c2_mi, f1_ma, f1_mi, f2_ma, f2_mi, pres, mts_x_min, velocidad, alimentacion, ventilacion
+FROM DATOS_HISTORICOS;
+WHERE 
+NRO_HOJA = numHoja
+AND NRO_LOTE= numLote;
+END;
+**********************************************************************
+CREATE OR REPLACE PACKAGE PQ1 AS 
+ PROCEDURE MOSTRAR_INFORMACION (numHoja CONTROL_PARAMETROS.NRO_HOJA%TYPE,numLote CONTROL_PARAMETROS.NRO_LOTE%TYPE)
+		PROCEDURE MOSTRAR_DATOS_HISTORICOS ( numHoja CONTROL_PARAMETROS.NRO_HOJA%TYPE, numLote CONTROL_PARAMETROS.NRO_LOTE%TYPE);
+END PQ1;
