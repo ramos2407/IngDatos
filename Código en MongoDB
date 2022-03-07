@@ -1,0 +1,20 @@
+db.createCollection("CLIENTES");
+doc1 = { RUC : 784956146 , NOMBRE: "Backus", TELEFONO: 1234567, TIPO_EMPRESA:"Alimentos"};
+doc2 = { RUC : 259162321, NOMBRE: "HYM", TELEFONO: 3698741,TIPO_EMPRESA:"Textil"};
+doc3 = { RUC : 315612301,NOMBRE:" Alicorp",TELEFONO: 3574123,TIPO_EMPRESA:"Alimentos"};
+doc4 = { RUC : 784513213,NOMBRE: "Mi Barrunto",TELEFONO: 3214569,TIPO_EMPRESA:"Alimentos"};
+doc5 = { RUC : 205186465,NOMBRE: "Donofrio",TELEFONO: 3698521,TIPO_EMPRESA:"Alimentos"};
+doc6 = { RUC : 189463525,NOMBRE: "CocaCola",TELEFONO: 7532159,TIPO_EMPRESA:"Alimentos"};
+doc7 = { RUC : 112244889, NOMBRE:"KFC" , TELEFONO: 7894561 ,TIPO_EMPRESA: "Alimentos"};
+
+clientes = [doc1, doc2, doc3, doc4, doc5, doc6, doc7 ];
+db.CLIENTES.insertMany(clientes);
+
+//Búsquedas 
+db.CLIENTES.find();
+db.CLIENTES.find({NOMBRE:"Alicorp"});
+db.CLIENTES.find ({RUC: 205186465});
+//SET 
+db.CLIENTES.update({NOMBRE:"Alicorp"}, {$set: {TELEFONO: 421245789}});
+db.CLIENTES.find ({NOMBRE:"Alicorp"});
+db.CLIENTES.find();
